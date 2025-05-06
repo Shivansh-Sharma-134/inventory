@@ -1,4 +1,5 @@
 const db = require("../data/queries");
+const { validationResult } = require("express-validator");
 
 async function listAllGames(req,res) {
     const games = await db.listAllGames();
@@ -11,7 +12,12 @@ async function deleteGame(req,res) {
     res.redirect("/");
 }
 
+async function addGame(req,res) {
+    
+}
+
 module.exports = {
     listAllGames,
-    deleteGame
+    deleteGame,
+    addGame
 }
