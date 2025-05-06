@@ -7,6 +7,8 @@ indexRouter.get("/", (req,res)=>{
     res.render("home",{title: "Homepage"})
 })
 
-indexRouter.use("/items",appController.listAllItems)
+indexRouter.use("/items",appController.listAllGames)
+
+indexRouter.use("/delete/:gameId",appController.deleteGame)
 
 module.exports = indexRouter;
