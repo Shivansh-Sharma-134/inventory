@@ -11,11 +11,17 @@ async function deleteGame(gameId) {
 }
 
 async function addGame(name,category,bio,price,stock,developer) {
-    await pool.query("INSERT INTO games (name,category,bio,price,stock,developer)  VALUES ($1,$2,$3,$4,$5,$6)",[name,category,bio,price,stock,developer]);
+    await pool.query("INSERT INTO games (name,category,bio,price,stock,developer) VALUES ($1,$2,$3,$4,$5,$6)",[name,category,bio,price,stock,developer]);
+}
+
+async function getCategories() {
+    const {rows} = await pool.query("SELECT DISTINCT category FROM games");
+    return rows;
 }
 
 module.exports = {
     listAllGames,
     deleteGame,
-    addGame
+    addGame,
+    getCategories
 }
