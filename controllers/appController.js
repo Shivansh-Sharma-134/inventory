@@ -6,6 +6,11 @@ async function listAllGames(req,res) {
     res.render("allitems",{title:"all games",games});
 }
 
+async function editGameForm(req,res) {
+    const game = db.getGame(req.params.gameId);
+    res.render("/editgameform", {game: game})
+}
+
 async function deleteGame(req,res) {
     const gameId = req.params.gameId;
     await db.deleteGame(gameId);
@@ -20,6 +25,11 @@ async function addGameForm(req,res) {
         old:{},
         errors: {}
     });
+}
+
+async function getCategories() {
+    const categories = await db.getCategories()
+    res.render("genres",{categories})
 }
 
 async function addGame(req,res) {
@@ -48,9 +58,37 @@ async function addGame(req,res) {
     res.redirect("/items");
 }
 
+async function editGame(req,res) {
+    const errors = validationResult(req);
+    
+    if(!errors.isEmpty()){
+        const errArray = errors.array();
+        const errorMap = {}
+        errArray.forEach(err => {
+            errorMap[err.path] = err.msg;
+        })
+        console.log(errorMap);
+        
+        const categories = await db.getCategories();
+        return res.status(400).render("editgameform",{
+            title: "Edit Game",
+            errors: errorMap,
+            old: req.body,
+            categories
+        })
+    }
+    const {nameInput,categoryInput,bioInput,priceInput,stockInput,developerInput} = req.body
+
+    await db.addGame(nameInput,categoryInput,bioInput,priceInput,stockInput,developerInput);
+
+    res.redirect("/items");
+}
+
 module.exports = {
     listAllGames,
     deleteGame,
     addGame,
-    addGameForm
+    addGameForm,
+    getCategories,
+    editGameForm,
 }
