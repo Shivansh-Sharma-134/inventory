@@ -5,10 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-    <%- include("partials/errors.ejs") %>
+    
     <form method="post" action="/addGame"> 
     <label for="nameInput">Name</label>
-    <input type="text" name="nameInput">
+    <input type="text" name="nameInput" value="<%= old?.nameInput || '' %>">
+    <%if(errors?.nameInput) {%>
+        <p style="color: red"><%= errors.nameInput%></p>
+    <%}%>
     <label for="categoryInput">Genre</label>
     <select name="categoryInput" id="options" style="width: 200px;">
     <%categories.forEach(category =>{%>
@@ -16,13 +19,25 @@
     <%})%>
     </select>
     <label for="bioInput">Bio</label>
-    <input type="text" name="bioInput">
+    <input type="text" name="bioInput" value="<%= old?.bioInput || '' %>">
+    <%if(errors?.bioInput){%>
+        <p style="color: red"><%= errors.bioInput%></p>
+    <%}%>
     <label for="priceInput">Price</label>
-    <input type="text" name="priceInput">
+    <input type="text" name="priceInput" value="<%= old?.priceInput || '' %>">
+    <%if(errors?.priceInput){%>
+        <p style="color: red"><%= errors.priceInput%></p>
+    <%}%>
     <label for="stockInput">Stock</label>
-    <input type="text" name="stockInput">
+    <input type="text" name="stockInput" value="<%= old?.stockInput || '' %>">
+    <%if(errors?.stockInput){%>
+        <p style="color: red"><%= errors.stockInput%></p>
+    <%}%>
     <label for="developerInput">Developer</label>
-    <input type="text" name="developerInput">
+    <input type="text" name="developerInput" value="<%= old?.developerInput || '' %>">
+    <%if(errors?.developerInput){%>
+        <p style="color: red"><%= errors.developerInput%></p>
+    <%}%>
     <button type="submit">submit</button>
     </form>
 </body>

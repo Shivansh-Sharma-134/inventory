@@ -9,23 +9,36 @@ async function listAllGames(req,res) {
 async function deleteGame(req,res) {
     const gameId = req.params.gameId;
     await db.deleteGame(gameId);
-    res.redirect("/");
+    res.redirect("/items");
 }
 
 async function addGameForm(req,res) {
     const categories = await db.getCategories();
     console.log(categories);
     
-    res.render("addgameform", {categories: categories });
+    res.render("addgameform", {categories: categories,
+        old:{},
+        errors: {}
+    });
 }
 
 async function addGame(req,res) {
     const errors = validationResult(req);
+    
     if(!errors.isEmpty()){
+        const errArray = errors.array();
+        const errorMap = {}
+        errArray.forEach(err => {
+            errorMap[err.path] = err.msg;
+        })
+        console.log(errorMap);
+        
+        const categories = await db.getCategories();
         return res.status(400).render("addgameform",{
             title: "Add Game",
-            errors: errors.array(),
-            old: req.body
+            errors: errorMap,
+            old: req.body,
+            categories
         })
     }
     const {nameInput,categoryInput,bioInput,priceInput,stockInput,developerInput} = req.body
