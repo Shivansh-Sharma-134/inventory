@@ -25,8 +25,7 @@ async function deleteGame(req,res) {
 
 async function addGameForm(req,res) {
     const categories = await db.getCategories();
-    console.log(categories);
-    
+    console.log(categories)
     res.render("addgameform", {categories: categories,
         old:{},
         errors: {}
@@ -84,7 +83,8 @@ async function editGame(req,res) {
    
     const gameId = req.params.gameId;
     const {nameInput,categoryInput,bioInput,priceInput,stockInput,developerInput} = req.body
-
+    
+    
     await db.editGame(nameInput,categoryInput,bioInput,priceInput,stockInput,developerInput,gameId);
 
     res.redirect("/items");
