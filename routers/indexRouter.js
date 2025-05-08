@@ -24,7 +24,7 @@ indexRouter.get("/delete/:gameId",appController.deleteGame)
 
 indexRouter.get("/editGameForm/:gameId", appController.editGameForm)
 
-indexRouter.post("/editGame",validatGame,appController.editGame)
+indexRouter.post("/editGame/:gameId",validatGame,appController.editGame)
 
 indexRouter.post("/addGame",validatGame,appController.addGame)
 

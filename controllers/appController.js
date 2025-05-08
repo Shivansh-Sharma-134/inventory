@@ -7,8 +7,14 @@ async function listAllGames(req,res) {
 }
 
 async function editGameForm(req,res) {
-    const game = db.getGame(req.params.gameId);
-    res.render("/editgameform", {game: game})
+    const game = await db.getGame(req.params.gameId);
+    const categories = await db.getCategories();
+        console.log(game.id);
+    res.render("editgameform", {game,
+        categories: categories,
+        old:{},
+        errors: {}
+    })
 }
 
 async function deleteGame(req,res) {
@@ -59,6 +65,7 @@ async function addGame(req,res) {
 }
 
 async function editGame(req,res) {
+    const game = await db.getGame(req.params.gameId);
     const errors = validationResult(req);
     
     if(!errors.isEmpty()){
@@ -70,16 +77,19 @@ async function editGame(req,res) {
         console.log(errorMap);
         
         const categories = await db.getCategories();
-        return res.status(400).render("editgameform",{
+        return res.status(400).render(`editgameform`,{
             title: "Edit Game",
             errors: errorMap,
             old: req.body,
-            categories
+            categories,
+            game
         })
     }
+   
+    const gameId = req.params.gameId;
     const {nameInput,categoryInput,bioInput,priceInput,stockInput,developerInput} = req.body
 
-    await db.addGame(nameInput,categoryInput,bioInput,priceInput,stockInput,developerInput);
+    await db.editGame(nameInput,categoryInput,bioInput,priceInput,stockInput,developerInput,gameId);
 
     res.redirect("/items");
 }
@@ -91,4 +101,5 @@ module.exports = {
     addGameForm,
     getCategories,
     editGameForm,
+    editGame
 }
