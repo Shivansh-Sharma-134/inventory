@@ -9,15 +9,15 @@ async function listAllCategories(req,res) {
 async function editCategoryForm(req,res) {
     const category = await db.getCategory(req.params.categoryId);
     res.render("editcategoryform", {
-        category: category,
+        category,
         old:{},
         errors: {}
     })
 }
 
 async function deleteCategory(req,res) {
-    const gameId = req.params.categoryId;
-    await db.deleteGame(categoryId);
+    const categoryId = req.params.categoryId;
+    await db.deleteCategory(categoryId);
     res.redirect("/categories");
 }
 
@@ -47,9 +47,9 @@ async function addCategory(req,res) {
     }
     const {nameInput,descriptionInput} = req.body
 
-    await db.addGame(nameInput,descriptionInput);
+    await db.addCategory(nameInput,descriptionInput);
 
-    res.redirect("/items");
+    res.redirect("/categories");
 }
 
 async function editCategory(req,res) {

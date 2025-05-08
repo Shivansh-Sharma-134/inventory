@@ -10,15 +10,15 @@
             <li>Name= <%= category.name %></li>
             <li>description= <%= category.description %></li>
         </ul>
-        <a href="/editcategoryform/<%= category.id%>">
+        <a href="/categories/editcategoryform/<%= category.id%>">
             <button>Edit</button>
         </a>
-        <a href="/deletecategory/<%= category.id%>">
+        <a href="/categories/deletecategory/<%= category.id%>">
             <button>delete</button>
         </a>
     <%})%>
     
-    <br><a href="/addcategoryform">
+    <br><a href="/categories/addcategoryform">
         <button>Add a new category</button>
     </a>
 </body>

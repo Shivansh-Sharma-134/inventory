@@ -11,15 +11,15 @@ const validatCategory = [
 
 categoriesRouter.get("/",categoriesController.listAllCategories)
 
-indexRouter.get("/deletecategory/:categoryId",categoriesController.deleteCategory)
+categoriesRouter.get("/deletecategory/:categoryId",categoriesController.deleteCategory);
 
-indexRouter.get("/editcategoriesform/:categoryId", categoriesController.editCategoryForm)
+categoriesRouter.get("/editcategoryform/:categoryId", categoriesController.editCategoryForm);
 
-indexRouter.post("/editcategory/:categoryId",validatCategory,categoriesController.editCategory)
+categoriesRouter.post("/editcategory/:categoryId",validatCategory,categoriesController.editCategory);
 
-indexRouter.post("/addcategory",validatCategory,categoriesController.addCategory)
+categoriesRouter.post("/addcategory",validatCategory,categoriesController.addCategory);
 
-indexRouter.get("/addcategoryform",categoriesController.addCategoryForm)
+categoriesRouter.get("/addcategoryform",categoriesController.addCategoryForm);
 
 
 

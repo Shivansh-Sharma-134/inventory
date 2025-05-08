@@ -6,7 +6,7 @@
 </head>
 <body>
     
-    <form method="post" action="/addcategory"> 
+    <form method="post" action="/categories/addcategory"> 
     <label for="nameInput">Name</label>
     <input type="text" name="nameInput" value="<%= old?.nameInput || '' %>">
     <%if(errors?.nameInput) {%>
@@ -15,7 +15,7 @@
     <label for="descriptionInput">Description</label>
     <input type="text" name="descriptionInput" value="<%= old?.descriptionInput || '' %>">
     <%if(errors?.descriptionInput){%>
-        <p style="color: red"><%= errors.descriptionInput></p>
+        <p style="color: red"><%= errors.descriptionInput%></p>
     <%}%>
     <button type="submit">submit</button>
     </form>
