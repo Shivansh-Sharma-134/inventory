@@ -18,8 +18,6 @@ indexRouter.get("/", (req,res)=>{
 
 indexRouter.get("/items",appController.listAllGames)
 
-indexRouter.get("/categories",appController.getCategories)
-
 indexRouter.get("/delete/:gameId",appController.deleteGame)
 
 indexRouter.get("/editGameForm/:gameId", appController.editGameForm)

@@ -15,13 +15,16 @@ developer VARCHAR(255)
 
 CREATE TABLE IF NOT EXISTS categories (
 id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-category VARCHAR(255)
+name VARCHAR(255),
+description VARCHAR(255)
 );
 
-INSERT INTO categories (category)
+INSERT INTO categories (name,description)
 VALUES
-    ('ACTION/RPG'),
-    ('simulation');
+    ('ACTION','The story takes a backseat and full on action is the main focus'),
+    ('RPG','Role playing games use character building and story as their elements'),
+    ('ACTION/RPG','The best of both world'),
+    ('simulation','Sticking to the real worls as much as possible');
 
 
 INSERT INTO games (name,category,bio,price,stock,developer)

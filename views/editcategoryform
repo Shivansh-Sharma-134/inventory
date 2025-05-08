@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <form method="post" action="/editCategory/<%= category.id%>"> 
+        <label for="nameInput">Name</label>
+        <input type="text" name="nameInput" value="<%= old?.nameInput || category.name %>">
+        <%if(errors?.nameInput) {%>
+            <p style="color: red"><%= errors.nameInput%></p>
+        <%}%>
+        <label for="descriptionInput">Bio</label>
+        <input type="text" name="descriptionInput" value="<%= old?.descriptionInput || category.description %>">
+        <%if(errors?.descriptionInput){%>
+            <p style="color: red"><%= errors.descriptionInput%></p>
+        <%}%>
+        <button type="submit">submit</button>
+        </form>
+</body>
+</html>

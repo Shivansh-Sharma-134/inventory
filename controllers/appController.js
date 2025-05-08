@@ -33,10 +33,6 @@ async function addGameForm(req,res) {
     });
 }
 
-async function getCategories() {
-    const categories = await db.getCategories()
-    res.render("genres",{categories})
-}
 
 async function addGame(req,res) {
     const errors = validationResult(req);
@@ -99,7 +95,6 @@ module.exports = {
     deleteGame,
     addGame,
     addGameForm,
-    getCategories,
     editGameForm,
     editGame
 }
